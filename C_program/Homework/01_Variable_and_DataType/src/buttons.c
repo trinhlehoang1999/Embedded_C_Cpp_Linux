@@ -9,17 +9,13 @@ SystemMode_Typedef handle_button_mode(void) {
     // For demonstration purposes, we will return AUTOMATIC mode.
     
     if (Read_button_Manual_mode() && Read_button_Automatic_mode()) {
-        printf("Switching to Automatic mode.\n");
         return AUTOMATIC;
     } else if(!Read_button_Manual_mode() && Read_button_Automatic_mode()) {
-        printf("Switching to Automatic mode.\n");
         return AUTOMATIC;
     } else if (Read_button_Manual_mode() && !Read_button_Automatic_mode()) {
-        printf("Switching to Manual mode.\n");
         return MANUAL;
     } else {
         // If neither button is pressed, we can assume the system remains in its current mode.
-        printf("Switching to OFF mode.\n");
         return OFF;
     }
 }
@@ -40,10 +36,10 @@ bool Read_button_Automatic_mode(void) {
     // In a real application, replace this with actual button reading logic.
     
     if (MODIFY_Automatic_Button) {
-        printf("Automatic button pressed.\n");
+//        printf("Automatic button pressed.\n");
         return true; // Button is pressed
     } else {
         printf("Automatic button not pressed.\n");
-        return false; // Button is not pressed
+//        return false; // Button is not pressed
     }
 }

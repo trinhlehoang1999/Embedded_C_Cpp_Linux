@@ -5,7 +5,7 @@
 
 #define MODIFY_Temperature 30   // Example temperature value in degrees Celsius
 
-#define MODIFY_Moisture 30     // Example soil moisture value in percentage
+#define MODIFY_Moisture 50     // Example soil moisture value in percentage
 
 #define MODIFY_SystemMode 1 // 1: Automatic mode, 0: Manual mode
 

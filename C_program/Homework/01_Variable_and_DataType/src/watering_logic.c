@@ -14,9 +14,12 @@ void timer_counter()
 
 void run_automic_watering()
 {
+    FuctionStatus_Typedef ret;
+
+    ret = Check_sensor_in_cyclic(); // Check sensors in cyclic mode
     // This function should implement the logic for automatic watering control.
     // For demonstration purposes, we will print a message indicating that the system is in automatic mode.    
-    if (system_config.current_mode == AUTOMATIC) {
+    if (system_config.current_mode == AUTOMATIC && ret == OK) {
         printf("Automatic watering control is active.\n");
         if (sensor_data.moisture < system_config.min_moisture_threshold) {
             // If soil moisture is below the minimum threshold, activate the pump
@@ -30,10 +33,12 @@ void run_automic_watering()
             // If soil moisture is within the acceptable range, do nothing
             printf("Soil moisture is within the acceptable range. No action needed.\n");
         }
-
-
-    } else {
-        printf("System is in manual mode. Automatic watering control is not active.\n");
+    } else if(system_config.current_mode == AUTOMATIC && ret == Waiting) {
+        printf("Waiting the next cycle.\n");
+    }
+    else {
+        printf("System is in manual mode or sensors check failed. Automatic watering control is not active.\n");
+        deactivate_pump(); // Ensure the pump is deactivated if not in automatic mode
     }
 }
 
@@ -41,6 +46,7 @@ void run_manual_watering()
 {
     // This function should implement the logic for manual watering control.
     // For demonstration purposes, we will print a message indicating that the system is in manual mode.
+    
     if (system_config.current_mode == MANUAL) {
         printf("Manual watering control is active.\n");
         if (Read_button_Manual_mode()) {
