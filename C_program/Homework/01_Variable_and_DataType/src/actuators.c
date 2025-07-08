@@ -7,10 +7,12 @@ int sensor_value_Pump = 0; // Example sensor value, replace with actual sensor r
 
 void activate_pump(void) {
     printf("Pump activated.\n");
+    output_led_state(LED_WATERING);
 }
 
 void deactivate_pump(void) {
     printf("Pump deactivated.\n");
+    output_led_state(LED_NORMAL);
 }
 
 void output_led_state(LedSate_Typedef led_state) {

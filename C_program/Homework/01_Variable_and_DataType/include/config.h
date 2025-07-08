@@ -17,7 +17,8 @@
 
 typedef enum {
     MANUAL,
-    AUTOMATIC
+    AUTOMATIC,
+    OFF
 } SystemMode_Typedef;
 
 typedef struct {
@@ -27,6 +28,8 @@ typedef struct {
     int Cycle_Sensor_time;            // Cycle time in seconds
     SystemMode_Typedef current_mode; // Current system mode (MANUAL or AUTOMATIC)
 } SystemConfig_Typedef;
+
+extern SystemConfig_Typedef system_config;
 
 #endif
 

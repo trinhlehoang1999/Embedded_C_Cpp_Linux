@@ -1,11 +1,6 @@
 #ifndef ACTUATORS_H
 #define ACTUATORS_H
 
-void activate_pump(void);
-void deactivate_pump(void);
-
-
-
 typedef enum {
     PUMP_OFF,
     PUMP_ON
@@ -19,5 +14,9 @@ typedef enum {
 } LedSate_Typedef;
 
 PumpState_Typedef get_pump_state(void);
+
+void activate_pump(void);
+void deactivate_pump(void);
+void output_led_state(LedSate_Typedef led_state);
 
 #endif // ACTUATORS_H

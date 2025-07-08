@@ -5,33 +5,52 @@
 #include "/home/hoang/Workspace/01_learning/C_program/Homework/01_Variable_and_DataType/include/actuators.h"
 #include "/home/hoang/Workspace/01_learning/C_program/Homework/01_Variable_and_DataType/include/config.h"
 
+Get_Sensors_Typedef sensor_data;
 
-void automatic_watering_control(SystemMode_Typedef mode, int soil_moisture, int min_threshold, int max_threshold, 
-                               unsigned long last_watering_time, unsigned long current_time, 
-                               unsigned long watering_interval, unsigned long max_watering_duration) {
-    static int pump_on = 0;
-    static unsigned long pump_start_time = 0;
+void timer_counter()
+{
 
-    if (mode == AUTOMATIC) {
-        if (!pump_on) {
-            // Kiểm tra điều kiện kích hoạt bơm
-            if (soil_moisture < min_threshold && (current_time - last_watering_time) > watering_interval) {
-                activate_pump();
-                pump_on = 1;
-                pump_start_time = current_time;
-            }
-        } else {
-            // Đang tưới, kiểm tra điều kiện dừng bơm
-            if (soil_moisture >= max_threshold || (current_time - pump_start_time) > max_watering_duration) {
-                deactivate_pump();
-                pump_on = 0;
-            }
-        }
-    } else {
-        // Nếu không ở chế độ tự động, đảm bảo bơm tắt
-        if (pump_on) {
+}
+
+void run_automic_watering()
+{
+    // This function should implement the logic for automatic watering control.
+    // For demonstration purposes, we will print a message indicating that the system is in automatic mode.    
+    if (system_config.current_mode == AUTOMATIC) {
+        printf("Automatic watering control is active.\n");
+        if (sensor_data.moisture < system_config.min_moisture_threshold) {
+            // If soil moisture is below the minimum threshold, activate the pump
+            printf("Soil moisture is below the minimum threshold. Activating pump...\n");
+            activate_pump();
+        } else if (sensor_data.moisture > system_config.max_moisture_threshold) {
+            // If soil moisture is above the maximum threshold, deactivate the pump
+            printf("Soil moisture is above the maximum threshold. Deactivating pump...\n");
             deactivate_pump();
-            pump_on = 0;
+        } else {
+            // If soil moisture is within the acceptable range, do nothing
+            printf("Soil moisture is within the acceptable range. No action needed.\n");
         }
+
+
+    } else {
+        printf("System is in manual mode. Automatic watering control is not active.\n");
     }
 }
+
+void run_manual_watering()
+{
+    // This function should implement the logic for manual watering control.
+    // For demonstration purposes, we will print a message indicating that the system is in manual mode.
+    if (system_config.current_mode == MANUAL) {
+        printf("Manual watering control is active.\n");
+        if (Read_button_Manual_mode()) {
+            printf("Manual button pressed. Activating pump...\n");
+            activate_pump();
+        } else {
+            printf("Manual button not pressed. Deactivating pump...\n");
+            deactivate_pump();
+        }
+    } else {
+        printf("System is in automatic mode. Manual watering control is not active.\n");
+    }
+}   

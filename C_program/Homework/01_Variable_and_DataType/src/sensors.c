@@ -2,10 +2,11 @@
 #include "/home/hoang/Workspace/01_learning/C_program/Homework/01_Variable_and_DataType/include/sensors.h"
 #include "/home/hoang/Workspace/01_learning/C_program/Homework/01_Variable_and_DataType/include/config.h"
 
-extern SystemConfig_Typedef system_config;
+SystemConfig_Typedef system_config;
+extern Get_Sensors_Typedef sensor_data;
 
 void get_sensors(void) {
-    Get_Sensors_Typedef sensor_data;
+    
 
     // Simulate reading sensor values
     // In a real application, replace these with actual sensor reading logic
