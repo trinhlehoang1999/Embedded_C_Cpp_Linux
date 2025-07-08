@@ -29,7 +29,7 @@ int main()
     SystemMode_Typedef ret;
     // Initialize the system, if needed
     Initialize_system_Parameter();
-    // do {
+    do {
         ret = handle_button_mode(); // Handle button presses to switch between manual and automatic modes
         if (ret == AUTOMATIC) {
             printf("System is in AUTOMATIC mode.\n");
@@ -41,7 +41,7 @@ int main()
             printf("System is OFF.\n");
             deactivate_pump(); // Deactivate the pump if the system is OFF
         }  
-    // } while (1); // Infinite loop to keep the program running
+    } while (1); // Infinite loop to keep the program running
       
     return 0;
 }
